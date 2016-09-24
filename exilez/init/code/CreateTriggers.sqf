@@ -43,10 +43,8 @@ if (_missionLRadius > 0) then {
 _trigger = createTrigger["EmptyDetector", _triggerPosition];
 _trigger setTriggerArea[_triggerRadius, _triggerRadius, 0, true]; 	//this is a sphere
 _trigger setTriggerTimeout [_activationDelay, _activationDelay, _activationDelay, false];
-//_trigger setTriggerActivation["GUER", "PRESENT", TRUE]; 			//Only Exile player can trigger
-//_trigger setTriggerStatements["this && {isplayer vehicle _x}count thislist > 0", "nul = [thisTrigger] spawn TriggerLoop;", ""];
 _trigger setTriggerActivation["ANY", "PRESENT", TRUE];    //Only Exile player can trigger
-_trigger setTriggerStatements["this && {isplayer vehicle x}count thislist > 0 || this && {side x == EAST }count thislist > 0 || this && {side x == CIV }count thislist > 0", "nul = [thisTrigger] spawn TriggerLoop;", ""];
+_trigger setTriggerStatements["this && {isplayer vehicle x}count thislist > 0 || this && {side x == EAST }count thislist > 0 || this && {side x == CIVILIAN }count thislist > 0", "nul = [thisTrigger] spawn TriggerLoop;", ""];
 
 
 if (_showTriggerOnMap) then {

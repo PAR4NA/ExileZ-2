@@ -37,7 +37,7 @@ if(_validLocation) then
 
 	// are other non zombie AI in range?
 	private _nearEASTAI 	= { side _x == EAST AND _x distance _position < MaxSpawnDistance } count allUnits;
-	private _nearCIVAI 		= { side _x == CIV AND _x distance _position < MaxSpawnDistance } count allUnits;
+	private _nearCIVAI 		= { side _x == CIVILIAN AND _x distance _position < MaxSpawnDistance } count allUnits;
 	private _nearAICount 	= _nearEASTAI + _nearCIVAI;
 	if(_nearAICount > 0) exitwith { _validLocation = true; }; 
 			

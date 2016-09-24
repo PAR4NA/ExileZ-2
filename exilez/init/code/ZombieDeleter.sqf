@@ -11,11 +11,19 @@ while {alive _zombie} do {
 	sleep MaxTime;
 	_zombiePos = getPos _zombie;
 	//check for the absence of players
-	if (({isplayer _x} count (_zombiePos nearEntities MaxDistance) == 0) && alive _zombie) then {
-		_zombie setdamage 1;
-		sleep 5;
-		deleteVehicle _zombie;
-		_distanceDeath = true;
+	if (({isplayer _x} count (_zombiePos nearEntities MaxDistance) == 0) && alive _zombie) then 
+	{
+		// are other non zombie AI in range?
+		_nearEASTAI 	= { side _x == EAST AND _x distance _zombiePos < MaxDistance } count allUnits;
+		_nearCIVAI 		= { side _x == CIVILIAN AND _x distance _zombiePos < MaxDistance } count allUnits;
+		_nearAICount 	= _nearEASTAI + _nearCIVAI;
+		if(_nearAICount == 0) then
+		{
+			_zombie setdamage 1;
+			sleep 5;
+			deleteVehicle _zombie;
+			_distanceDeath = true;		
+		};
 	};
 	//check for flags
 	if (RemoveZfromTerritory && _avoidTerritory && alive _zombie)then
