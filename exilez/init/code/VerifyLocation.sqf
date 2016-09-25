@@ -8,7 +8,7 @@
 _ignorePlayer 		= false;
 _position 			= _this select 0;
 _avoidTerritory 	= _this select 1;
-_safeDistance 		= 500;
+_safeDistance 		= 300;
 _validLocation 		= true;
 
 if (count _this == 3) then {
