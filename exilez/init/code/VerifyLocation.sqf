@@ -32,6 +32,11 @@ if(_validLocation) then
     private _nearBase = (nearestObjects [_position,["Exile_Construction_Flag_Static"],_safeDistance]) select 0;
     if (!isNil "_nearBase" && _avoidTerritory) exitwith { _validLocation = false;  };	
 	
+	// Check if zombies already exist in range
+	private _nearZEDSAI 	= { side _x == WEST AND _x distance _position < MaxSpawnDistance } count allUnits;
+	if(_nearZEDSAI > 5) exitwith { _validLocation = false; }; 
+
+	
     // is position in range of a player?
     if([_position, MaxSpawnDistance] call ExileClient_util_world_isAlivePlayerInRange) exitwith { _validLocation = true; }; 
 
@@ -40,6 +45,8 @@ if(_validLocation) then
 	private _nearCIVAI 		= { side _x == CIVILIAN AND _x distance _position < MaxSpawnDistance } count allUnits;
 	private _nearAICount 	= _nearEASTAI + _nearCIVAI;
 	if(_nearAICount > 0) exitwith { _validLocation = true; }; 
+	
+	
 			
 };
 
